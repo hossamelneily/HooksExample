@@ -68,7 +68,7 @@ const Ingredients=(props)=> {
 
    const RemoveHandler=(id)=>{
          setloadingstate(prevState => prevState = true)
-        fetch(`https://ingredients-20d75.firebaseio.com/ig/${id}.jon/`,
+        fetch(`https://ingredients-20d75.firebaseio.com/ig/${id}.json/`,
             {
                 method: 'DELETE',
              }).then(response => (
