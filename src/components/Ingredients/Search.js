@@ -1,17 +1,20 @@
 import React,{useState,useEffect} from 'react';
 
+
+
 import Card from '../UI/Card';
 import './Search.css';
 
 const Search = React.memo(props => {
-    const {onLoadedFilter} = props
+    const {onLoadedFilter,onSearch,onError} = props
     const [FilteredData,setFilteredData] =useState('')
-
 
         useEffect(()=>{
         const query = FilteredData.length === 0
             ? ''
             : `?orderBy="title"&equalTo="${FilteredData}"`;
+        // onSpinner(true)
+            onSearch(true)
         fetch('https://ingredients-20d75.firebaseio.com/ig.json'+query)
             .then(response => response.json())
             .then(
@@ -28,10 +31,15 @@ const Search = React.memo(props => {
                 }
 
                 onLoadedFilter(LoadedData)
-            }
+                onSearch(false)
+            },
 
+        ).catch(error => (
+                onError("Something went Wrong !!"),
+                onSearch(false)
+            )
         )
-    },[FilteredData,onLoadedFilter])
+    },[FilteredData,onLoadedFilter,onSearch,onError])
 
 
 
