@@ -39,7 +39,7 @@ const Search = React.memo(props => {
                 onSearch(false)
             )
         )
-    },[FilteredData,onLoadedFilter,onSearch,onError])
+    },[FilteredData])
 
 
 
